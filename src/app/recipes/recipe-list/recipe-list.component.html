@@ -1,0 +1,34 @@
+<div class="row" *ngIf="getAuthService().isAuthenticated() && getAuthService().isAdmin()"> 
+	<div class="col-xs-12">
+		<button class="btn btn-success" (click)="onAddNewRecipe()">New Recipe</button>
+	</div>
+</div>
+
+<hr>
+
+<div class="row">
+	<div class="col-xs-12">
+		<app-recipe-item 
+			*ngFor="let recipe of recipes" 
+			[recipe]="recipe"
+		>
+		</app-recipe-item>
+		<ul *ngIf="pager" class="pagination">
+			<li [ngClass]="{disabled:pager.currentPage === 1}">
+                <a (click)="onSetPage(1)">First</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <a (click)="onSetPage(pager.currentPage - 1)">Previous</a>
+            </li>
+            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                <a (click)="onSetPage(page)">{{page}}</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            	<a (click)="onSetPage(pager.currentPage + 1)">Next</a>
+	        </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a (click)="onSetPage(pager.totalPages)">Last</a>
+            </li>
+        </ul>
+	</div>
+</div>

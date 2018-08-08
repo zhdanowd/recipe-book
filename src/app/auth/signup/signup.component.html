@@ -1,0 +1,43 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+		<form (ngSubmit)="onSignup()" [formGroup]="signupForm">
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input type="email" id="email" formControlName="email" class="form-control">
+			</div>
+			<span 
+              *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched && !signupForm.pending"
+              class="help-block">
+              <span *ngIf="signupForm.get('email').errors['emailExist']">
+				This email already exist!
+              </span>
+            </span>
+			<span 
+              *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched &&!signupForm.pending"
+              class="help-block">
+				invalid email!
+              </span>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input type="password" formControlName="password" id="password"  class="form-control">
+			</div>
+			<span 
+              *ngIf="!signupForm.get('password').valid && signupForm.get('password').touched"
+              class="help-block">
+				Please enter a password!
+            </span>
+            <div class="form-group">
+				<label for="firstName">First name</label>
+				<input type="text" formControlName="firstName" id="firstName"  class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="password">Last name</label>
+				<input type="text" formControlName="lastName" id="lastName"  class="form-control">
+			</div>
+			<button
+				[disabled]="!signupForm.valid || signupForm.pending"
+				type="submit"
+				class="btn btn-primary">Sign up</button>
+		</form>	
+	</div>
+</div>
